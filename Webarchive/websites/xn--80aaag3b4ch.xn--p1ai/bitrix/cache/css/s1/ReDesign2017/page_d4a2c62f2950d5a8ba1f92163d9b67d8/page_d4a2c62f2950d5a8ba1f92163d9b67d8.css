@@ -1,0 +1,164 @@
+
+
+/* Start:/bitrix/components/bitrix/system.pagenavigation/templates/round/style.css?14957689252917*/
+.bx-pagination {
+	margin: 10px 0;
+}
+.bx-pagination .bx-pagination-container {
+	text-align: center;
+	position: relative;
+}
+.bx-pagination .bx-pagination-container ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: inline-block;
+}
+.bx-pagination .bx-pagination-container ul li {
+	display: inline-block;
+	margin: 0 2px 15px 2px;
+}
+.bx-pagination .bx-pagination-container ul li span{
+    -webkit-transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+       -moz-transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+    	-ms-transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+    	 -o-transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+    		transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+	background: #eff0f1;
+	padding: 0 8px;
+	display: block;
+	height: 32px;
+	min-width: 32px;
+	line-height: 32px;
+	color: #444;
+	font-size: 14px;
+	border-radius: 16px;
+	vertical-align: middle;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.bx-pagination .bx-pagination-container ul li a {
+	text-decoration: none;
+	display: block;
+	border-radius: 16px;
+	height: 32px;
+	min-width: 32px;
+	line-height: 32px;
+	color: #444;
+	vertical-align: middle;
+}
+.bx-pagination .bx-pagination-container ul li a:hover span{
+	background: #DADADA;
+}
+.bx-pagination .bx-pagination-container ul li.bx-active span{
+	background: #0083d1;
+	color: #fff;
+}
+.bx-pagination .bx-pagination-container ul li.bx-pag-all a span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-prev a span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-next a span {
+	background: #fff;
+	border: 2px solid #eff0f1;
+	line-height: 28px;
+	padding: 0 18px;
+	color: #444;
+}
+.bx-pagination .bx-pagination-container ul li.bx-pag-all span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-prev span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-next span{
+	color: #aab1b4;
+	background: #fff;
+	border: 2px solid #eff0f1;
+	line-height: 28px;
+	padding: 0 18px;
+}
+.bx-pagination .bx-pagination-container ul li.bx-pag-all a:hover span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-prev a:hover span,
+.bx-pagination .bx-pagination-container ul li.bx-pag-next a:hover span {
+	background: #fff;
+	border-color: #DADADA;
+	color: #000;
+}
+
+/*color schemes*/
+.bx-pagination.bx-green  .bx-pagination-container ul li.bx-active span{
+	background: #3bc915;
+	color: #fff;
+}
+.bx-pagination.bx-yellow  .bx-pagination-container ul li.bx-active span{
+	background: #F9A91D;
+	color: #fff;
+}
+.bx-pagination.bx-red  .bx-pagination-container ul li.bx-active span{
+	background: #E22B2B;
+	color: #fff;
+}
+.bx-pagination.bx-blue .bx-pagination-container ul li.bx-active span{
+	background: #0083d1;
+	color: #fff;
+}
+
+/* End */
+
+
+/* Start:/bitrix/templates/ReDesign2017/components/bitrix/news.list/reviews_resp17/style.css?1495845260883*/
+div.news-list img.preview_picture
+{
+	float:left;
+	margin:0 4px 6px 0;
+}
+.oziv-button {
+    padding: 5% 0;
+background: rgba(137, 3, 158, 0.39);
+width: 100%;
+display: block;
+text-align: center;
+margin-bottom: 15%;
+cursor: pointer;
+font-weight: 700;
+}
+.news-date-time {
+	color:#486DAA;
+}
+.otziv-block.with-answer{
+   border-bottom:0;
+   margin:0;
+   padding:0;
+}
+
+.otziv-block-name{
+color: #b2ffff;
+margin-bottom: 15px;
+position: relative;
+}
+
+.otziv-block .info-block .otziv-block-text{
+   font-style:italic;
+}
+.otziv-block .info-block{
+   position:relative;
+   padding:20px 30px;
+}
+.otziv-block{
+   float:Left;
+   width:100%;
+   padding-bottom:25px;
+   margin-bottom:25px;
+   border-bottom:1px solid #fff;
+}
+.otziv-bloc-date{
+   position:absolute;
+   bottom:0;
+   right:0;
+}
+
+.info-block {
+    border: 1px solid #94d0ec;
+    background: RGBA(10, 118, 162, 0.42);
+    margin: 30px 0;
+}
+
+/* End */
+/* /bitrix/components/bitrix/system.pagenavigation/templates/round/style.css?14957689252917 */
+/* /bitrix/templates/ReDesign2017/components/bitrix/news.list/reviews_resp17/style.css?1495845260883 */

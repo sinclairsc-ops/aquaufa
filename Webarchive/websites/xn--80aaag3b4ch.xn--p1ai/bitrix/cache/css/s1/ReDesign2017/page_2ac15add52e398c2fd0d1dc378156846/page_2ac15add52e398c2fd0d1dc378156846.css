@@ -1,0 +1,28 @@
+
+
+/* Start:/bitrix/templates/ReDesign2017/components/bitrix/news/inner_content_resp17/bitrix/news.list/.default/style.css?1496955474439*/
+.news-list {
+    width: 100%;
+}
+.news-list img{
+height: 250px;
+background: #a5e4fd;
+overflow: hidden;
+position: relative;
+width: 100%;
+}
+
+.news-item {display: inline-block;width: 40%;padding: 0 4% 4%;vertical-align: top;}
+
+.news-item a {display: block;    text-align: center;}
+
+.news-item p {text-align: center;}
+
+.news-item p:nth-of-type(2) {text-align: left;}
+
+.news-item img {width: 70%;}
+
+.news-date-time  {color:#fff;display: block;}
+
+/* End */
+/* /bitrix/templates/ReDesign2017/components/bitrix/news/inner_content_resp17/bitrix/news.list/.default/style.css?1496955474439 */

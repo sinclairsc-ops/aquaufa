@@ -1,0 +1,22 @@
+
+
+/* Start:/bitrix/templates/ReDesign2017/components/bitrix/news/news_content_resp17/bitrix/news.detail/.default/style.css?1495920716198*/
+div.news-detail
+{
+	word-wrap: break-word;
+}
+div.news-detail img.detail_picture
+{
+	float:left;
+	margin:0 8px 6px 1px;
+}
+.news-date-time
+{
+
+    color: #fff;
+    display: block;
+    padding: 0 0 2%;
+}
+
+/* End */
+/* /bitrix/templates/ReDesign2017/components/bitrix/news/news_content_resp17/bitrix/news.detail/.default/style.css?1495920716198 */
