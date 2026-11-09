@@ -24,7 +24,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:"PT Sans",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:#f6fbfd;line-height:1.55}
+body{font-family:"PT Sans",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:#f6fbfd;line-height:1.55;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:var(--blue)}
 .container{max-width:1140px;margin:0 auto;padding:0 20px}
@@ -55,8 +55,7 @@ header.compact .hdr-hours{padding:4px 12px;font-size:.72rem}
 .hero h1{font-family:Sunday,cursive;font-weight:400;font-size:clamp(1.9rem,4.5vw,3.2rem);margin-bottom:14px;text-shadow:1px 1px 7px rgb(0,111,156)}
 .hero p{font-size:clamp(1rem,2vw,1.2rem);max-width:720px;margin-bottom:26px;opacity:.95}
 .badge{display:inline-block;background:rgba(57,159,201,.92);color:#fff;font-weight:700;padding:6px 14px;border-radius:30px;margin-bottom:18px;font-size:.9rem}
-.wave{position:absolute;left:0;right:0;bottom:-1px;line-height:0}
-.wave svg{width:100%;height:70px;display:block}
+.wave{position:absolute;left:0;right:0;bottom:-1px;line-height:0;overflow:hidden}
 .wave path{fill:#f6fbfd}
 
 /* Sections */
@@ -201,7 +200,7 @@ footer a{color:#fff}
 
 /* Animated wave */
 .wave svg{width:200%;height:70px;display:block}
-.wave-move{animation:waveShift 9s linear infinite}
+.wave-move{animation:waveShift 9s linear infinite;transform-origin:left center}
 @keyframes waveShift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* Count badge */
@@ -217,7 +216,7 @@ footer a{color:#fff}
 .slider-wrap{position:relative}
 .s-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;box-shadow:0 3px 10px rgba(0,92,150,.3);transition:.2s;opacity:.85}
 .s-arrow:hover{opacity:1;background:var(--darker)}
-.s-prev{left:-12px}.s-next{right:-12px}
+.s-prev{left:8px}.s-next{right:8px}
 .news-track{scroll-snap-type:x mandatory;overflow-x:auto;scrollbar-width:thin;scroll-behavior:smooth;padding-bottom:6px;display:flex!important}
 .news-track .news-item{scroll-snap-align:start}
 .news-track.snapping .news-item{flex:0 0 calc((100% - 36px)/3)}
@@ -228,20 +227,7 @@ footer a{color:#fff}
 mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
 .hl{outline:3px solid var(--sky);outline-offset:3px;border-radius:var(--radius);animation:pop .4s ease}
 
-/* Feedback modal */
-.modal-back{position:fixed;inset:0;background:rgba(6,42,68,.75);z-index:110;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadein .25s}
-.modal-back[hidden]{display:none}
-.modal{background:#fff;border-radius:16px;max-width:480px;width:100%;padding:28px;position:relative;max-height:88vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.modal h3{color:var(--darker);margin-bottom:6px;font-size:1.3rem}
-.muted-note{font-size:.85rem;color:var(--muted);margin-bottom:16px}
-.modal label{display:block;font-size:.88rem;font-weight:600;color:var(--darker);margin-bottom:12px}
-.modal input,.modal textarea{display:block;width:100%;margin-top:4px;border:2px solid #dceefb;border-radius:10px;padding:10px 12px;font:inherit;color:var(--text);outline:none;transition:border-color .2s;resize:vertical}
-.modal input:focus,.modal textarea:focus{border-color:var(--blue)}
-.form-err{color:#bd081d;font-size:.88rem;margin-top:10px}
-.form-ok{color:#1bae5d;font-size:.92rem;margin-top:10px;font-weight:600}
-#fbSaved{margin-top:14px}
-.saved-item{background:var(--bg);border-radius:10px;padding:10px 14px;font-size:.85rem;margin-top:8px}
-.saved-item b{color:var(--darker)}
+/* Feedback modal — удалён по требованию заказчика: кнопки и окна обратной связи на сайте нет */
 
 @media(max-width:980px){
   .burger{display:flex}
@@ -306,27 +292,9 @@ mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
 <section id="offers" class="section-alt">
   <div class="container">
     <h2>Акции, скидки и возможности</h2>
-    <div class="tabs reveal offer-tabs" role="tablist">
-      <button class="tab active" data-otab="spec">Спецпредложения</button>
-      <button class="tab" data-otab="promo">Акции и скидки</button>
-    </div>
-    <div class="offer-pane reveal" data-opane="spec">
-      <div class="grid g-4">
-        <div class="card offer tilt"><img src="img/sp-lgotnye-tarify.jpg" alt="Льготные тарифы"><div class="txt"><h3>Льготные тарифы</h3><p class="desc">Билеты по меньшей цене для льготной категории граждан, в том числе в каникулы.</p></div></div>
-        <div class="card offer tilt"><img src="img/sp-gruppovye.jpg" alt="Групповые посещения"><div class="txt"><h3>Групповые посещения</h3><p class="desc">Для групп действует система скидок.</p></div></div>
-        <div class="card offer tilt"><img src="img/sp-detskiy-dr.jpg" alt="Детский день рождения"><div class="txt"><h3>Детский День рождения</h3><p class="desc">Организация яркого поздравления с детскими аниматорами!</p></div></div>
-        <div class="card offer tilt"><img src="img/sp-korporativy.jpg" alt="Корпоративы"><div class="txt"><h3>Корпоративы и Дни рождения</h3><p class="desc">Проведите корпоратив или профессиональный праздник по-летнему, в кругу коллег или друзей!</p></div></div>
-      </div>
-    </div>
-    <div class="offer-pane reveal" data-opane="promo" hidden>
-      <div class="grid g-4">
-        <div class="card offer tilt"><img src="img/akciya-leto.jpg" alt="Лето в подарок — подарочный билет" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Лето в подарок</h3><p class="desc">Подарочный билет в Уфимский Аквапарк — кусочек лета в любое время года. Презент, который точно оценят дорогие вам люди.</p></div></div>
-        <div class="card offer tilt"><img src="img/news-2.jpg" alt="Три билета по цене двух"><div class="txt"><h3>Три билета по цене двух</h3><p class="desc">Приходите втроём — оплачивайте за двоих! Подробности в разделе «Новости».</p></div></div>
-        <div class="card offer tilt"><img src="img/news-1.jpg" alt="Детский билет за чек"><div class="txt"><h3>Детский билет за чек из «Планеты»</h3><p class="desc">1 чек из детского магазина ТРЦ от 2 000 ₽ = билет для ребёнка в подарок.</p></div></div>
-        <div class="card offer tilt"><img src="img/akciya-detskiy-bilet.jpg" alt="Детский билет за чек — акция" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Акция «Детский билет за чек»</h3><p class="desc">Официальный баннер акции: чек из детских магазинов ТРЦ «Планета» дарит ребёнку билет в аквапарк.</p></div></div>
-        <div class="card offer tilt"><img src="img/hotel-akva.jpg" alt="Путешествуем с гостиничными комплексами" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Путешествуйте с комфортом</h3><p class="desc">Постояльцам гостиниц «Башкирия», «Президент Отель», «Хилс Гарден», «Нестеров Плаза» и «Тан» — детский билет в подарок.</p></div></div>
-      </div>
-    </div>
+    <!-- Содержимое раздела (табы и карточки) строится из данных файла data.js (window.SITE_DATA.offers) -->
+    <div class="tabs reveal offer-tabs" role="tablist" id="offerTabs"></div>
+    <div id="offerPanes"></div>
 
     <div class="promo reveal">
       <h3>Скидка 10% на интернет-билет</h3>
@@ -482,7 +450,6 @@ mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
         </div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:26px"><button class="btn" id="openFeedback">Задать вопрос / оставить отзыв</button></div>
     <div class="notice">Покупка онлайн-билетов — на сервисе <a href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">order.аквауфа.рф</a>.</div>
   </div>
 </section>
@@ -495,23 +462,6 @@ mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
 </footer>
 
 <button id="toTop" aria-label="Наверх">↑</button>
-
-<div class="modal-back" id="fbModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
-    <button class="lb-btn lb-close" id="fbClose" aria-label="Закрыть">&#10005;</button>
-    <h3 id="fbTitle">Напишите нам</h3>
-    <p class="muted-note">Основной сайт восстанавливается — вопросы и отзывы можно оставить здесь, они сохранятся в этом браузере.</p>
-    <form id="fbForm" novalidate>
-      <label>Имя<input type="text" name="name" required placeholder="Ваше имя"></label>
-      <label>Телефон или e-mail<input type="text" name="contact" required placeholder="+7 ... или mail@example.ru"></label>
-      <label>Сообщение<textarea name="msg" rows="4" required placeholder="Ваш вопрос или отзыв"></textarea></label>
-      <button class="btn" type="submit">Отправить</button>
-      <div class="form-err" id="fbErr" hidden>Пожалуйста, заполните все поля.</div>
-      <div class="form-ok" id="fbOk" hidden>Спасибо! Ваше обращение сохранено.</div>
-    </form>
-    <div id="fbSaved"></div>
-  </div>
-</div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
   <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">✕</button>
@@ -558,6 +508,26 @@ mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
     // Ссылки покупки билетов
     if(D.buyUrl){
       document.querySelectorAll('a[href*="order."]').forEach(a=>{a.href=D.buyUrl;});
+    }
+    // Кнопка «Купить билет» в шапке — сразу ведёт на страницу покупки (открывается в новой вкладке)
+    const hdrBuy=document.querySelector('header .btn');
+    if(hdrBuy){hdrBuy.classList.remove('js-scroll');hdrBuy.setAttribute('href',D.buyUrl||'#buy');hdrBuy.target='_blank';hdrBuy.rel='noopener';}
+    // Раздел «Акции, скидки и возможности» строится из window.SITE_DATA.offers
+    if(Array.isArray(D.offers)&&D.offers.length){
+      const tabsBox=document.getElementById('offerTabs'),panesBox=document.getElementById('offerPanes');
+      const escH=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      tabsBox.innerHTML='';panesBox.innerHTML='';
+      D.offers.forEach((tab,i)=>{
+        const b=document.createElement('button');
+        b.className='tab'+(i===0?' active':'');b.dataset.otab=tab.id;b.textContent=tab.title;
+        tabsBox.appendChild(b);
+        const pane=document.createElement('div');
+        pane.className='offer-pane reveal visible';pane.dataset.opane=tab.id;if(i>0)pane.hidden=true;
+        pane.innerHTML='<div class="grid g-4">'+(tab.items||[]).map(it=>
+          '<div class="card offer tilt"><img src="'+escH(it.img)+'" alt="'+escH(it.alt||it.title)+'"'+(it.banner?' style="aspect-ratio:16/6;object-fit:cover"':'')+'>'+
+          '<div class="txt"><h3>'+escH(it.title)+'</h3><p class="desc">'+escH(it.desc)+'</p></div></div>').join('')+'</div>';
+        panesBox.appendChild(pane);
+      });
     }
   }catch(e){console.warn('SITE_DATA:',e);}
 })();
@@ -635,7 +605,7 @@ document.getElementById('lbNext').onclick=()=>openLb(curIdx+1);
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 addEventListener('keydown',e=>{
   if(!lb.classList.contains('open'))return;
-  if(e.key==='Escape'){closeLb();fbModal.hidden=true;}
+  if(e.key==='Escape'){closeLb();}
   if(e.key==='ArrowLeft')openLb(curIdx-1);
   if(e.key==='ArrowRight')openLb(curIdx+1);
 });
@@ -652,12 +622,13 @@ burger.addEventListener('click',()=>{
 });
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.classList.remove('open');}));
 
-// --- Табы акций ---
-document.querySelectorAll('.offer-tabs .tab').forEach(tab=>tab.addEventListener('click',()=>{
+// --- Табы акций (делегирование: содержимое строится из data.js) ---
+document.getElementById('offerTabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');if(!tab)return;
   document.querySelectorAll('.offer-tabs .tab').forEach(t=>t.classList.remove('active'));
   tab.classList.add('active');
   document.querySelectorAll('.offer-pane').forEach(p=>p.hidden=p.dataset.opane!==tab.dataset.otab);
-}));
+});
 
 // --- Слайдер новостей ---
 const track=document.getElementById('newsTrack');track.classList.add('snapping');
@@ -706,30 +677,6 @@ if(window.matchMedia && matchMedia('(hover:hover)').matches){
     card.addEventListener('mouseleave',()=>card.style.transform='');
   });
 }
-
-// --- Модальное окно обратной связи (localStorage) ---
-const fbModal=document.getElementById('fbModal');
-document.getElementById('openFeedback').onclick=()=>{fbModal.hidden=false;renderSaved();};
-document.getElementById('fbClose').onclick=()=>fbModal.hidden=true;
-fbModal.addEventListener('click',e=>{if(e.target===fbModal)fbModal.hidden=true;});
-function getFb(){try{return JSON.parse(localStorage.getItem('akvaufa_fb')||'[]')}catch(e){return[]}}
-function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function renderSaved(){
-  const list=getFb(),box=document.getElementById('fbSaved');
-  box.innerHTML=list.length?'<h4 style="color:var(--darker);margin-top:14px">Ваши обращения:</h4>'+list.map(f=>`<div class="saved-item"><b>${esc(f.name)}</b> (${f.date})<br>${esc(f.msg)}</div>`).join(''):'';
-}
-document.getElementById('fbForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const f=e.target,err=document.getElementById('fbErr'),ok=document.getElementById('fbOk');
-  err.hidden=true;ok.hidden=true;
-  // обращаемся через elements: свойство form.name может перекрываться встроенным полем name формы
-  const el=f.elements, nv=(el['name']?.value||'').trim(), cv=(el['contact']?.value||'').trim(), mv=(el['msg']?.value||'').trim();
-  if(!nv||!cv||!mv){err.hidden=false;return;}
-  const list=getFb();
-  list.unshift({name:nv,msg:mv,date:new Date().toLocaleDateString('ru-RU')});
-  localStorage.setItem('akvaufa_fb',JSON.stringify(list));
-  ok.hidden=true;ok.hidden=false;f.reset();renderSaved();
-});
 
 // --- Калькулятор билетов ---
 (function(){
