@@ -8,7 +8,8 @@
 <link rel="icon" href="img/favicon.ico">
 <!-- PT Sans — оригинальный шрифт сайта (Google Fonts, как в шаблоне Bitrix аквауфа.рф) -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,cyrillic&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,cyrillic&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&amp;subset=latin,cyrillic"></noscript>
 <style>
 /* Оформление повторяет оригинальный сайт аквауфа.рф (Bitrix-шаблон ReDesign2017):
    фирменный шрифт заголовков Sunday с text-shadow, текст PT Sans,
@@ -527,13 +528,12 @@ addEventListener('scroll',()=>{
 // --- Активный пункт меню (scroll spy) ---
 const links=[...document.querySelectorAll('#mainNav a')];
 const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
-new IntersectionObserver(es=>{
+const spy=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){
     links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
   }});
-},{rootMargin:'-40% 0px -55% 0px'}).observe && secs.forEach(s=>s&&new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting) links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));});
-},{rootMargin:'-40% 0px -55% 0px'}).observe(s));
+},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
 
 // --- Появление секций при прокрутке ---
 const ro=new IntersectionObserver(es=>es.forEach(e=>{
@@ -651,7 +651,7 @@ function updCount(){cnt.textContent='Показано: '+visibleCards().length+'
 tabs.forEach(t=>t.addEventListener('click',updCount));updCount();
 
 // --- Tilt-эффект карточек ---
-if(matchMedia('(hover:hover)').matches){
+if(window.matchMedia && matchMedia('(hover:hover)').matches){
   document.querySelectorAll('.tilt').forEach(card=>{
     card.addEventListener('mousemove',e=>{
       const r=card.getBoundingClientRect();
@@ -677,9 +677,11 @@ document.getElementById('fbForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=e.target,err=document.getElementById('fbErr'),ok=document.getElementById('fbOk');
   err.hidden=true;ok.hidden=true;
-  if(!f.name.value.trim()||!f.contact.value.trim()||!f.msg.value.trim()){err.hidden=false;return;}
+  // обращаемся через elements: свойство form.name может перекрываться встроенным полем name формы
+  const el=f.elements, nv=(el['name']?.value||'').trim(), cv=(el['contact']?.value||'').trim(), mv=(el['msg']?.value||'').trim();
+  if(!nv||!cv||!mv){err.hidden=false;return;}
   const list=getFb();
-  list.unshift({name:f.name.value.trim(),msg:f.msg.value.trim(),date:new Date().toLocaleDateString('ru-RU')});
+  list.unshift({name:nv,msg:mv,date:new Date().toLocaleDateString('ru-RU')});
   localStorage.setItem('akvaufa_fb',JSON.stringify(list));
   ok.hidden=true;ok.hidden=false;f.reset();renderSaved();
 });
@@ -725,9 +727,9 @@ document.querySelectorAll('.js-scroll').forEach(a=>a.addEventListener('click',e=
 }));
 
 // --- Кнопка «Наверх» ---
-const top=document.getElementById('toTop');
-addEventListener('scroll',()=>top.classList.toggle('show',scrollY>500),{passive:true});
-top.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+const toTopBtn=document.getElementById('toTop');
+addEventListener('scroll',()=>toTopBtn.classList.toggle('show',scrollY>500),{passive:true});
+toTopBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 </script>
 
 </body>
