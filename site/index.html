@@ -7,69 +7,131 @@
 <meta name="description" content="Аквапарк Уфа — единственный в городе и Республике Башкортостан крытый парк водных развлечений площадью 5400 кв.м. 11 экстремальных аттракционов, волновой бассейн, relax-зона, детский городок. ТРЦ «Планета», ул. Энтузиастов, 20. Телефон: 8 (347) 297-0-297.">
 <link rel="icon" href="img/favicon.ico">
 <style>
+/* Оформление повторяет оригинальный сайт аквауфа.рф (Bitrix-шаблон ReDesign2017):
+   фирменный шрифт заголовков Sunday с text-shadow, текст PT Sans,
+   палитра #0084b9/#0078b4/#006f9c/#005c96/#399fc9/#E8F7FA, пилюли border-radius:30px */
+@font-face{font-family:'Sunday';src:url('fonts/Sunday.woff2') format('woff2'),url('fonts/Sunday.woff') format('woff'),url('fonts/Sunday.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'PT Sans';src:url('fonts/pts55f.woff2') format('woff2'),url('fonts/pts55f.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'PT Sans';src:url('fonts/pts75f.woff2') format('woff2'),url('fonts/pts75f.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 :root{
-  --blue:#0e7dc2; --deep:#084a75; --accent:#ff9800; --bg:#f4f9fd;
-  --text:#2b3a46; --muted:#6b7d8c; --card:#ffffff; --radius:14px;
+  --blue:#0084b9; --deep:#006f9c; --darker:#005c96; --sky:#399fc9; --lightblue:#4a84b7;
+  --hero:#062a44; --mint:#869791; --bg:#e8f7fa; --card:#ffffff;
+  --text:#4f4f4f; --muted:#4f4f4f; --radius:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+body{font-family:"PT Sans",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:#f6fbfd;line-height:1.55}
 img{max-width:100%;display:block}
 a{color:var(--blue)}
 .container{max-width:1140px;margin:0 auto;padding:0 20px}
 
-/* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(8,74,117,.95);backdrop-filter:blur(6px);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-.header-in{display:flex;align-items:center;gap:18px;padding:10px 0;flex-wrap:wrap}
+/* Header — тёмно-синяя полупрозрачная шапка, как на оригинале */
+header{position:sticky;top:0;z-index:60;background:rgba(0,92,150,.96);backdrop-filter:blur(6px);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2);transition:padding .25s,box-shadow .25s}
+.header-in{display:flex;align-items:center;gap:18px;padding:12px 0;flex-wrap:wrap;transition:padding .25s}
+header.compact .header-in{padding:6px 0}
+header.compact .logo img{height:38px}
+header.compact .logo span{font-family:Sunday,cursive;font-size:1.25rem;text-shadow:1px 1px 7px rgb(0,111,156)}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
-.logo img{height:48px;width:auto;background:#fff;border-radius:8px;padding:2px}
-.logo span{font-weight:700;font-size:1.05rem;line-height:1.2}
-.logo small{display:block;font-weight:400;font-size:.72rem;opacity:.8}
+.logo img{height:48px;width:auto;background:#fff;border-radius:8px;padding:2px;transition:height .25s}
+.logo span{font-family:Sunday,cursive;font-weight:400;font-size:1.35rem;line-height:1.2;text-shadow:1px 1px 7px rgb(0,111,156);transition:font-size .25s}
+.logo small{display:block;font-family:"PT Sans",sans-serif;font-weight:400;font-size:.72rem;opacity:.8;text-shadow:none}
 nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-nav a{color:#dceefb;text-decoration:none;font-size:.9rem;padding:6px 10px;border-radius:8px}
-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+nav a{color:#dceefb;text-decoration:none;font-size:.9rem;padding:6px 10px;border-radius:30px;position:relative;transition:.2s}
+nav a:hover{background:rgba(255,255,255,.14);color:#fff}
+nav a.active{color:#fff;background:rgba(57,159,201,.35)}
 .phone{font-weight:700;color:#fff;text-decoration:none;white-space:nowrap}
-.btn{display:inline-block;background:var(--accent);color:#2b1d00!important;font-weight:700;text-decoration:none;padding:12px 26px;border-radius:30px;transition:.2s;box-shadow:0 4px 14px rgba(255,152,0,.35)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,152,0,.45)}
+.btn{display:inline-block;background:var(--blue);color:#fff!important;font-weight:700;text-decoration:none;padding:12px 26px;border-radius:30px;transition:.2s;box-shadow:0 4px 14px rgba(0,120,180,.35);border:none;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn:hover{background:var(--darker);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,92,150,.45)}
 .btn-sm{padding:8px 18px;font-size:.9rem}
 
-/* Hero */
-.hero{position:relative;color:#fff;padding:90px 0 70px;background:linear-gradient(rgba(6,42,68,.55),rgba(6,42,68,.8)),url('img/hero.jpg') center/cover}
-.hero h1{font-size:clamp(1.7rem,4vw,2.8rem);margin-bottom:14px;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+/* Hero + wave divider (как волны waves-attr.png на оригинальном сайте) */
+.hero{position:relative;color:#fff;padding:90px 0 110px;background:linear-gradient(rgba(6,42,68,.55),rgba(6,42,68,.8)),url('img/hero.jpg') center/cover;background-attachment:fixed}
+.hero h1{font-family:Sunday,cursive;font-weight:400;font-size:clamp(1.9rem,4.5vw,3.2rem);margin-bottom:14px;text-shadow:1px 1px 7px rgb(0,111,156)}
 .hero p{font-size:clamp(1rem,2vw,1.2rem);max-width:720px;margin-bottom:26px;opacity:.95}
-.badge{display:inline-block;background:rgba(255,152,0,.92);color:#2b1d00;font-weight:700;padding:6px 14px;border-radius:20px;margin-bottom:18px;font-size:.9rem}
+.badge{display:inline-block;background:rgba(57,159,201,.92);color:#fff;font-weight:700;padding:6px 14px;border-radius:30px;margin-bottom:18px;font-size:.9rem}
+.wave{position:absolute;left:0;right:0;bottom:-1px;line-height:0}
+.wave svg{width:100%;height:70px;display:block}
+.wave path{fill:#f6fbfd}
 
 /* Sections */
-section{padding:56px 0}
-h2{font-size:clamp(1.4rem,3vw,2rem);color:var(--deep);margin-bottom:26px;position:relative;padding-bottom:10px}
-h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;border-radius:2px;background:var(--accent)}
+section{padding:56px 0;scroll-margin-top:84px}
+.section-alt{background:var(--bg)}
+h2{font-family:Sunday,cursive;font-weight:400;font-size:clamp(1.6rem,3.4vw,2.3rem);color:var(--darker);margin-bottom:26px;position:relative;padding-bottom:10px;text-shadow:1px 1px 7px rgb(0,111,156)}
+h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;border-radius:2px;background:var(--sky)}
 .grid{display:grid;gap:22px}
 .g-about{grid-template-columns:1.6fr 1fr;align-items:start}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:0 3px 14px rgba(14,80,130,.08);overflow:hidden}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:0 3px 14px rgba(0,92,150,.08);overflow:hidden}
 .card .txt{padding:18px}
-.card h3{color:var(--deep);font-size:1.05rem;margin-bottom:6px}
+.card h3{color:var(--darker);font-size:1.05rem;margin-bottom:6px}
 .card p.desc{color:var(--muted);font-size:.92rem}
+
+/* Тарифы и калькулятор билетов (как блок «Цены на билеты» на оригинальном сайте) */
+.g-tariff{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.tariff{position:relative;background:var(--card);border-radius:var(--radius);padding:24px 18px;text-align:center;box-shadow:0 3px 14px rgba(0,92,150,.08);border:2px solid transparent;transition:.2s}
+.tariff:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,92,150,.18)}
+.tariff.hit{border-color:var(--sky)}
+.tariff .rib{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.72rem;font-weight:700;border-radius:30px;padding:3px 14px;white-space:nowrap}
+.tariff h3{color:var(--darker);font-size:1.02rem;margin-bottom:10px}
+.tariff .prices s{display:block;color:var(--mint);font-size:.9rem}
+.tariff .prices b{display:block;font-size:1.7rem;color:var(--blue);line-height:1.2}
+.tariff small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+.calc{background:linear-gradient(rgba(0,111,156,.9),rgba(0,92,150,.92)),url('img/promo-skidka.jpg') center/cover;border-radius:var(--radius);color:#fff;padding:28px;margin-top:26px;box-shadow:0 6px 20px rgba(0,92,150,.25)}
+.calc h3{font-family:Sunday,cursive;font-weight:400;font-size:1.5rem;margin-bottom:16px;text-shadow:1px 1px 7px rgb(0,111,156)}
+.calc-rows{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.stepper{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);border-radius:30px;padding:8px 14px}
+.stepper button{width:34px;height:34px;border-radius:50%;border:none;background:#fff;color:var(--darker);font-size:1.25rem;font-weight:700;cursor:pointer;line-height:1;transition:.15s}
+.stepper button:hover{background:var(--sky);color:#fff;transform:scale(1.08)}
+.stepper span{min-width:2ch;text-align:center;font-size:1.25rem;font-weight:700}
+.stepper em{font-style:normal;font-size:.9rem;opacity:.95}
+.calc-total{margin-left:auto;text-align:right}
+.calc-total s{opacity:.7;font-size:.95rem}
+.calc-total b{display:block;font-size:1.9rem}
+.calc-note{font-size:.82rem;opacity:.85;margin-top:12px}
+@media(max-width:620px){.calc-total{margin-left:0;text-align:left;width:100%}}
 .facts{background:#e8f4fc;border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px}
 .facts li{margin-left:18px;margin-bottom:8px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:22px}
-.stat{background:var(--card);border-radius:var(--radius);text-align:center;padding:20px 10px;box-shadow:0 3px 14px rgba(14,80,130,.08)}
+.stat{background:var(--card);border-radius:var(--radius);text-align:center;padding:20px 10px;box-shadow:0 3px 14px rgba(0,92,150,.08)}
 .stat b{display:block;font-size:1.8rem;color:var(--blue)}
 .stat span{font-size:.85rem;color:var(--muted)}
 
-/* Attractions */
+/* Attractions: filter tabs + cards */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tab{background:#fff;border:2px solid var(--sky);color:var(--darker);border-radius:30px;padding:7px 18px;font-size:.9rem;cursor:pointer;transition:.2s;font-family:inherit}
+.tab:hover{background:var(--bg)}
+.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.calc-tabs .tab{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.6);color:#fff}
+.calc-tabs .tab:hover{background:rgba(255,255,255,.28)}
+.calc-tabs .tab.active{background:#fff;border-color:#fff;color:var(--darker)}
 .g-attr{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.attr img{aspect-ratio:3/2;object-fit:cover;width:100%}
-.attr:hover{transform:translateY(-4px);transition:.2s}
+.attr img{aspect-ratio:3/2;object-fit:cover;width:100%;transition:transform .4s}
+.attr:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,92,150,.18);transition:.2s}
+.attr:hover img{transform:scale(1.06)}
+.attr.hidden-card{display:none}
+.attr.pop{animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(6,42,68,.92);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.lightbox.open{display:flex;animation:fadein .25s}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.lightbox img{max-width:90vw;max-height:72vh;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lightbox .cap{color:#fff;margin-top:14px;font-size:1.05rem;font-weight:600}
+.lb-btn{position:absolute;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.6rem;width:48px;height:48px;border-radius:50%;cursor:pointer;transition:.2s}
+.lb-btn:hover{background:var(--blue)}
+.lb-close{top:18px;right:18px}
+.lb-prev{left:14px;top:50%;transform:translateY(-50%)}
+.lb-next{right:14px;top:50%;transform:translateY(-50%)}
 
 /* Zones */
 .zone{display:grid;grid-template-columns:1fr 1fr;min-height:230px}
 .zone img{width:100%;height:100%;object-fit:cover}
 .zone .txt{padding:26px;display:flex;flex-direction:column;justify-content:center}
-.zone h3{color:var(--deep);margin-bottom:10px;font-size:1.25rem}
+.zone h3{color:var(--darker);margin-bottom:10px;font-size:1.25rem}
 .zone:nth-child(even) img{order:2}
 
 /* Promo banner */
-.promo{background:linear-gradient(rgba(8,74,117,.75),rgba(8,74,117,.75)),url('img/promo-skidka.jpg') center/cover;color:#fff;text-align:center;border-radius:var(--radius);padding:56px 24px;margin-top:8px}
+.promo{background:linear-gradient(rgba(0,92,150,.8),rgba(6,42,68,.8)),url('img/promo-skidka.jpg') center/cover;color:#fff;text-align:center;border-radius:var(--radius);padding:56px 24px;margin-top:8px}
 .promo h3{font-size:clamp(1.3rem,3vw,1.9rem);margin-bottom:12px}
 .promo p{max-width:640px;margin:0 auto 24px;opacity:.95}
 
@@ -77,55 +139,145 @@ h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;bor
 .g-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .offer img,.news-item img.mini{width:100%;aspect-ratio:1/1;object-fit:cover}
 .news{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-.news-item{display:flex;gap:14px;background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 3px 14px rgba(14,80,130,.08);text-decoration:none;color:var(--text)}
+.news-item{display:flex;gap:14px;background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 3px 14px rgba(0,92,150,.08);color:var(--text);cursor:pointer;transition:.2s}
+.news-item:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,92,150,.15)}
 .news-item img{width:84px;height:84px;object-fit:cover;border-radius:10px;flex-shrink:0}
 .news-item time{font-size:.78rem;color:var(--muted)}
-.news-item strong{display:block;color:var(--deep);margin:2px 0;font-size:.95rem}
+.news-item strong{display:block;color:var(--darker);margin:2px 0;font-size:.95rem}
 .news-item p{font-size:.85rem;color:var(--muted)}
+.news-item .more{font-size:.8rem;color:var(--blue);font-weight:600}
+.news-full{display:none;font-size:.85rem;color:var(--muted);margin-top:6px}
+.news-item.expanded .news-full{display:block;animation:fadein .3s}
 
 /* Extra services */
 .services{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
-.svc{background:var(--card);border-radius:var(--radius);padding:22px 16px;text-align:center;box-shadow:0 3px 14px rgba(14,80,130,.08)}
+.svc{background:var(--card);border-radius:var(--radius);padding:22px 16px;text-align:center;box-shadow:0 3px 14px rgba(0,92,150,.08);transition:.2s}
+.svc:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,92,150,.16)}
 .svc img{width:90px;height:90px;object-fit:contain;margin:0 auto 12px}
-.svc h3{font-size:1rem;color:var(--deep)}
+.svc h3{font-size:1rem;color:var(--darker)}
 
 /* Contacts */
 .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
-.contact-card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 3px 14px rgba(14,80,130,.08)}
-.contact-card h3{color:var(--deep);margin-bottom:10px;font-size:1.05rem}
+.contact-card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 3px 14px rgba(0,92,150,.08)}
+.contact-card h3{color:var(--darker);margin-bottom:10px;font-size:1.05rem}
 .contact-card a{font-size:1.15rem;font-weight:700;text-decoration:none;display:block;margin-bottom:4px}
 .socials{display:flex;gap:10px;margin-top:10px}
-.socials a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;text-decoration:none}
-.socials a:hover{background:var(--deep)}
+.socials a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;text-decoration:none;transition:.2s}
+.socials a:hover{background:var(--darker);transform:scale(1.1)}
 
-footer{background:var(--deep);color:#bcd9ee;padding:26px 0;margin-top:56px;font-size:.88rem;text-align:center}
+footer{background:var(--hero);color:#bcd9ee;padding:26px 0;margin-top:56px;font-size:.88rem;text-align:center}
 footer a{color:#fff}
-.notice{background:#fff8e6;border:1px solid #f0d9a0;color:#7a5c00;border-radius:10px;padding:12px 18px;margin:26px auto 0;max-width:760px;font-size:.85rem;text-align:center}
+.notice{background:#e8f4fc;border:1px solid #b9dcf3;color:var(--darker);border-radius:10px;padding:12px 18px;margin:26px auto 0;max-width:760px;font-size:.85rem;text-align:center}
+
+/* Reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Back to top */
+#toTop{position:fixed;right:22px;bottom:22px;z-index:70;width:48px;height:48px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,92,150,.4);opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s}
+#toTop.show{opacity:1;pointer-events:auto;transform:none}
+#toTop:hover{background:var(--darker)}
+
+/* Scroll progress */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--sky);z-index:70}
+
+
+/* Burger + mobile drawer */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:26px;height:3px;background:#fff;border-radius:2px;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.search-box{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;color:#cfe8f8;margin-left:6px}
+.search-box input{background:none;border:none;outline:none;color:#fff;font-size:.85rem;width:130px}
+.search-box input::placeholder{color:#a8cfe6}
+
+/* Animated wave */
+.wave svg{width:200%;height:70px;display:block}
+.wave-move{animation:waveShift 9s linear infinite}
+@keyframes waveShift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Count badge */
+.count-badge{margin-left:auto;align-self:center;font-size:.82rem;color:var(--darker);background:#dceefb;border-radius:14px;padding:4px 12px;white-space:nowrap}
+
+/* Offer tabs panes */
+.offer-tabs{margin-bottom:20px}
+.offer-pane[hidden]{display:none}
+.offer img{aspect-ratio:16/10;object-fit:cover}
+.tilt{transition:transform .18s ease-out,box-shadow .2s}
+
+/* News slider */
+.slider-wrap{position:relative}
+.s-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;box-shadow:0 3px 10px rgba(0,92,150,.3);transition:.2s;opacity:.85}
+.s-arrow:hover{opacity:1;background:var(--darker)}
+.s-prev{left:-12px}.s-next{right:-12px}
+.news-track{scroll-snap-type:x mandatory;overflow-x:auto;scrollbar-width:thin;scroll-behavior:smooth;padding-bottom:6px;display:flex!important}
+.news-track .news-item{scroll-snap-align:start}
+.news-track.snapping .news-item{flex:0 0 calc((100% - 36px)/3)}
+@media(max-width:900px){.news-track.snapping .news-item{flex:0 0 calc((100% - 18px)/2)}}
+@media(max-width:620px){.news-track.snapping .news-item{flex:0 0 100%}.s-prev,.s-next{display:none}}
+
+/* Search highlight */
+mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px}
+.hl{outline:3px solid var(--sky);outline-offset:3px;border-radius:var(--radius);animation:pop .4s ease}
+
+/* Feedback modal */
+.modal-back{position:fixed;inset:0;background:rgba(6,42,68,.75);z-index:110;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadein .25s}
+.modal-back[hidden]{display:none}
+.modal{background:#fff;border-radius:16px;max-width:480px;width:100%;padding:28px;position:relative;max-height:88vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.modal h3{color:var(--darker);margin-bottom:6px;font-size:1.3rem}
+.muted-note{font-size:.85rem;color:var(--muted);margin-bottom:16px}
+.modal label{display:block;font-size:.88rem;font-weight:600;color:var(--darker);margin-bottom:12px}
+.modal input,.modal textarea{display:block;width:100%;margin-top:4px;border:2px solid #dceefb;border-radius:10px;padding:10px 12px;font:inherit;color:var(--text);outline:none;transition:border-color .2s;resize:vertical}
+.modal input:focus,.modal textarea:focus{border-color:var(--blue)}
+.form-err{color:#bd081d;font-size:.88rem;margin-top:10px}
+.form-ok{color:#1bae5d;font-size:.92rem;margin-top:10px;font-weight:600}
+#fbSaved{margin-top:14px}
+.saved-item{background:var(--bg);border-radius:10px;padding:10px 14px;font-size:.85rem;margin-top:8px}
+.saved-item b{color:var(--darker)}
+
+@media(max-width:980px){
+  .burger{display:flex}
+  #mainNav{position:fixed;inset:0 28% 0 0;background:rgba(0,60,100,.98);flex-direction:column;padding:84px 24px 24px;transform:translateX(-105%);transition:transform .3s;z-index:65;margin:0;width:auto;order:0;overflow-y:auto}
+  #mainNav.open{transform:none}
+  #mainNav a{font-size:1.05rem;padding:10px 12px}
+  .search-box{margin:12px 0 0}
+  .search-box input{width:100%}
+  .header-in{gap:12px}
+  .phone{margin-left:auto}
+}
 
 @media(max-width:820px){
   .g-about,.zone{grid-template-columns:1fr}
   .zone:nth-child(even) img{order:0}
   nav{margin-left:0;order:3;width:100%}
+  .hero{background-attachment:scroll}
 }
 </style>
 </head>
 <body>
 
-<header>
+<div id="progress"></div>
+
+<header id="siteHeader">
   <div class="container header-in">
     <a class="logo" href="#top">
       <img src="img/logo.png" alt="Логотип Аквапарк Уфа">
       <span>Аквапарк Уфа<small>официальный сайт_temp</small></span>
     </a>
-    <nav>
-      <a href="#about">О нас</a>
-      <a href="#attractions">Аттракционы</a>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav id="mainNav">
       <a href="#offers">Акции</a>
       <a href="#news">Новости</a>
+      <a href="#prices">Билеты</a>
+      <a href="#attractions">Аттракционы</a>
+      <a href="#zones">Зоны отдыха</a>
+      <a href="#about">О нас</a>
       <a href="#contacts">Контакты</a>
+      <label class="search-box"><input type="search" id="search" placeholder="Поиск по сайту…" aria-label="Поиск по сайту"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></label>
     </nav>
     <a class="phone" href="tel:+73472970297">8 (347) 297-0-297</a>
-    <a class="btn btn-sm" href="#buy">Купить билет −10%</a>
+    <a class="btn btn-sm js-scroll" href="#buy">Купить билет −10%</a>
   </div>
 </header>
 
@@ -135,21 +287,153 @@ footer a{color:#fff}
     <h1>Аквапарк Уфа «Планета» — летнее пространство развлечений для всей семьи!</h1>
     <p>11 экстремальных аттракционов, волновой бассейн, relax-зона с саунами и хамамом, детский городок — в затерянном мире Юрского периода на территории ТРЦ «Планета».</p>
     <a class="btn" id="buy" href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">Купить билет со скидкой 10%</a>
+    <a class="btn btn-outline js-scroll" href="#prices" style="margin-left:10px;background:rgba(255,255,255,.14);box-shadow:none;border:2px solid rgba(255,255,255,.7)">Цены на билеты</a>
+  </div>
+  <div class="wave" aria-hidden="true">
+    <svg viewBox="0 0 2880 70" preserveAspectRatio="none"><path class="wave-move" d="M0,40 C240,75 480,5 720,30 C960,55 1200,20 1440,45 C1680,75 1920,5 2160,30 C2400,55 2640,20 2880,45 L2880,70 L0,70 Z"/></svg>
   </div>
 </div>
+
+<section id="offers" class="section-alt">
+  <div class="container">
+    <h2>Акции, скидки и возможности</h2>
+    <div class="tabs reveal offer-tabs" role="tablist">
+      <button class="tab active" data-otab="spec">Спецпредложения</button>
+      <button class="tab" data-otab="promo">Акции и скидки</button>
+    </div>
+    <div class="offer-pane reveal" data-opane="spec">
+      <div class="grid g-4">
+        <div class="card offer tilt"><img src="img/sp-lgotnye-tarify.jpg" alt="Льготные тарифы"><div class="txt"><h3>Льготные тарифы</h3><p class="desc">Билеты по меньшей цене для льготной категории граждан, в том числе в каникулы.</p></div></div>
+        <div class="card offer tilt"><img src="img/sp-gruppovye.jpg" alt="Групповые посещения"><div class="txt"><h3>Групповые посещения</h3><p class="desc">Для групп действует система скидок.</p></div></div>
+        <div class="card offer tilt"><img src="img/sp-detskiy-dr.jpg" alt="Детский день рождения"><div class="txt"><h3>Детский День рождения</h3><p class="desc">Организация яркого поздравления с детскими аниматорами!</p></div></div>
+        <div class="card offer tilt"><img src="img/sp-korporativy.jpg" alt="Корпоративы"><div class="txt"><h3>Корпоративы и Дни рождения</h3><p class="desc">Проведите корпоратив или профессиональный праздник по-летнему, в кругу коллег или друзей!</p></div></div>
+      </div>
+    </div>
+    <div class="offer-pane reveal" data-opane="promo" hidden>
+      <div class="grid g-4">
+        <div class="card offer tilt"><img src="img/akciya-leto.jpg" alt="Лето в подарок — подарочный билет" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Лето в подарок</h3><p class="desc">Подарочный билет в Уфимский Аквапарк — кусочек лета в любое время года. Презент, который точно оценят дорогие вам люди.</p></div></div>
+        <div class="card offer tilt"><img src="img/news-2.jpg" alt="Три билета по цене двух"><div class="txt"><h3>Три билета по цене двух</h3><p class="desc">Приходите втроём — оплачивайте за двоих! Подробности в разделе «Новости».</p></div></div>
+        <div class="card offer tilt"><img src="img/news-1.jpg" alt="Детский билет за чек"><div class="txt"><h3>Детский билет за чек из «Планеты»</h3><p class="desc">1 чек из детского магазина ТРЦ от 2 000 ₽ = билет для ребёнка в подарок.</p></div></div>
+        <div class="card offer tilt"><img src="img/akciya-detskiy-bilet.jpg" alt="Детский билет за чек — акция" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Акция «Детский билет за чек»</h3><p class="desc">Официальный баннер акции: чек из детских магазинов ТРЦ «Планета» дарит ребёнку билет в аквапарк.</p></div></div>
+        <div class="card offer tilt"><img src="img/hotel-akva.jpg" alt="Путешествуем с гостиничными комплексами" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Путешествуйте с комфортом</h3><p class="desc">Постояльцам гостиниц «Башкирия», «Президент Отель», «Хилс Гарден», «Нестеров Плаза» и «Тан» — детский билет в подарок.</p></div></div>
+      </div>
+    </div>
+
+    <div class="promo reveal">
+      <h3>Скидка 10% на интернет-билет</h3>
+      <p>При покупке билетов на сайте экономьте 10% от стоимости билета на кассах. Скидка уже учтена в тарифе 2 часа, 4 часа и полный день. Акции и скидки друг с другом не суммируются.</p>
+      <a class="btn" href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">Купить билет со скидкой 10%</a>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="container">
+    <h2>Свежие новости и спецпредложения</h2>
+    <div class="slider-wrap reveal"><button class="s-arrow s-prev" id="newsPrev" aria-label="Назад">&#8249;</button><button class="s-arrow s-next" id="newsNext" aria-label="Вперёд">&#8250;</button>
+    <div class="news news-track" id="newsTrack">
+      <div class="news-item"><img src="img/news-1.jpg" alt=""><div><time>15.09.2026</time><strong>Детский билет в Аквапарк за чек из детских магазинов ТРЦ «Планета» — до 25 декабря</strong><p>1 чек от 2 000 рублей = билет для ребёнка в Уфимский Аквапарк!</p><span class="more">Подробнее ▾</span><div class="news-full">Акция действует до 25 декабря. Покажите чек из детского магазина ТРЦ «Планета» на кассе аквапарка и получите бесплатный билет для ребёнка.</div></div></div>
+      <div class="news-item"><img src="img/news-2.jpg" alt=""><div><time>06.07.2026</time><strong>Приходите втроём, оплачивайте за двоих!</strong><p>Акция «Три билета по цене двух» снова действует в Уфимском Аквапарке до 30 сентября.</p><span class="more">Подробнее ▾</span><div class="news-full">Купите полный билет на весь день для себя и своего ребёнка — а второй родитель получит билет в подарок.</div></div></div>
+      <div class="news-item"><img src="img/news-3.jpg" alt=""><div><time>01.07.2026</time><strong>Детский билет в аквапарк за чек из TeikaBoom</strong><p>Весело совмещаем отдых в TeikaBoom с отдыхом в аквапарке!</p><span class="more">Подробнее ▾</span><div class="news-full">Покажите чек из магазина TeikaBoom на кассе аквапарка и получите детский билет в подарок.</div></div></div>
+      <div class="news-item"><img src="img/news-4.jpg" alt=""><div><time>01.06.2026</time><strong>Путешествуйте в Уфимский Аквапарк с детским билетом из гостиничных комплексов</strong><p>Как выгодно путешествовать с ребёнком постояльцам ГК «Башкирия», «Президент Отель», «Хилс Гарден», «Нестеров Плаза» и «Тан».</p><span class="more">Подробнее ▾</span><div class="news-full">Постояльцам указанных гостиничных комплексов — детский билет в аквапарк в подарок. Подробности уточняйте на стойке регистрации отеля.</div></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="prices" class="section-alt">
+  <div class="container">
+    <h2>Билеты и цены</h2>
+    <p style="max-width:820px;margin-bottom:22px">Скидка 10% уже учтена в тарифе интернет-билета — она предоставляется от базовых цен кассы и распространяется на тарифы «2 часа», «4 часа» и «Полный день». Акции и скидки между собой не суммируются.</p>
+    <div class="grid g-tariff reveal">
+      <div class="tariff tilt"><h3>2 часа</h3><div class="prices"><s>взрослый 1950 ₽</s><b>1755 ₽</b></div><small>детский — 1575 ₽ <em>(вместо 1750 ₽)</em></small></div>
+      <div class="tariff hit tilt"><span class="rib">выгоднее всего</span><h3>4 часа</h3><div class="prices"><s>взрослый 2350 ₽</s><b>2115 ₽</b></div><small>детский — 1890 ₽ <em>(вместо 2100 ₽)</em></small></div>
+      <div class="tariff tilt"><h3>Полный день</h3><div class="prices"><s>взрослый 2650 ₽</s><b>2385 ₽</b></div><small>детский — 2115 ₽ <em>(вместо 2350 ₽)</em></small></div>
+      <div class="tariff tilt"><h3>Льготные тарифы</h3><div class="prices"><b>−10%</b><span style="font-size:.85rem;color:var(--muted)">и больше</span></div><small>для льготной категории граждан, в том числе в каникулы</small></div>
+    </div>
+
+    <div class="calc reveal" id="calcBox">
+      <h3>Калькулятор билетов</h3>
+      <div class="calc-rows">
+        <label class="stepper"><button type="button" data-calc="adult" data-d="-1" aria-label="Меньше взрослых">−</button><span id="cntAdult">2</span><button type="button" data-calc="adult" data-d="1" aria-label="Больше взрослых">+</button><em>взрослых</em></label>
+        <label class="stepper"><button type="button" data-calc="kid" data-d="-1" aria-label="Меньше детей">−</button><span id="cntKid">1</span><button type="button" data-calc="kid" data-d="1" aria-label="Больше детей">+</button><em>детей</em></label>
+        <div class="tabs calc-tabs" role="tablist" style="margin:0">
+          <button class="tab" data-tariff="120">2 часа</button>
+          <button class="tab active" data-tariff="240">4 часа</button>
+          <button class="tab" data-tariff="9999">Полный день</button>
+        </div>
+        <div class="calc-total">Итого: <s id="calcOld"></s><b id="calcSum"></b></div>
+      </div>
+      <p class="calc-note">Цены указаны для ориентира по актуальному прайсу аквапарка. Итоговая стоимость оформляется на сайте продажи билетов со скидкой 10%, уже учтённой в тарифе.</p>
+      <a class="btn" href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">Купить билет со скидкой 10%</a>
+    </div>
+  </div>
+</section>
+
+<section id="attractions">
+  <div class="container">
+    <h2>Аттракционы и развлечения</h2>
+    <div class="tabs attr-tabs reveal" role="tablist">
+      <button class="tab active" data-filter="all">Все</button>
+      <button class="tab" data-filter="extreme">Экстремальные</button>
+      <button class="tab" data-filter="family">Семейные</button>
+      <button class="tab" data-filter="kids">Детские</button>
+      <button class="tab" data-filter="relax">Relax</button>
+      <span class="count-badge" id="attrCount"></span>
+    </div>
+    <div class="grid g-attr reveal">
+      <div class="card attr" data-cat="extreme" data-full="Высота старта более 12 метров, а протяжённость более 45 метров! Испытайте себя!"><img src="img/5c356df03636c95cdc7dc1654cdad0de.jpg" alt="Аттракцион Камикадзе"><div class="txt"><h3>Камикадзе</h3><p class="desc">Высота старта более 12 метров, а протяжённость более 45 метров! Испытайте себя!</p></div></div>
+      <div class="card attr" data-cat="family" data-full="Огромный бассейн с настоящими волнами дарит ощущения неповторимого отдыха у моря. Волны генерируются каждые несколько минут — проверено!"><img src="img/4613643507037a56db2939cb96be9a0f.jpg" alt="Волновой бассейн"><div class="txt"><h3>Волновой бассейн</h3><p class="desc">Огромный бассейн с настоящими волнами дарит ощущения неповторимого отдыха у моря.</p></div></div>
+      <div class="card attr" data-cat="extreme" data-full="Для отважных! Старт из-под потолка через люк — адреналин гарантирован."><img src="img/fb6c80adec720c4fc1e5b335282dec76.jpg" alt="Аттракцион Свободное падение"><div class="txt"><h3>Свободное падение</h3><p class="desc">Для отважных!</p></div></div>
+      <div class="card attr" data-cat="extreme" data-full="Закружит! Завертит! Спиральная труба, в которой захватывает дух."><img src="img/e1225e8035ee7fb6189032cde4dfed05.jpg" alt="Аттракцион Круговорот"><div class="txt"><h3>Круговорот</h3><p class="desc">Закружит! Завертит!</p></div></div>
+      <div class="card attr" data-cat="family" data-full="Вот это виражи! Быстрый сплав по извилистому руслу."><img src="img/9950481dae3de6324ff00f1bc8624c96.jpg" alt="Аттракцион Быстрая река"><div class="txt"><h3>Быстрая река</h3><p class="desc">Вот это виражи!</p></div></div>
+      <div class="card attr" data-cat="extreme" data-full="Большие радости! Двухполосная закрытая труба — соревнуйтесь с друзьями."><img src="img/68e9ce62e777f95138f3fcf3888d440b.jpg" alt="Аттракцион Анаконда"><div class="txt"><h3>Анаконда</h3><p class="desc">Большие радости.</p></div></div>
+      <div class="card attr" data-cat="family" data-full="День сменяется ночью! Аттракцион со световыми эффектами и звуками природы."><img src="img/912c2b1ea938aa7b70cc9ac4ab1569ee.jpg" alt="Аттракцион Горный ручей"><div class="txt"><h3>Горный ручей</h3><p class="desc">День сменяется ночью!</p></div></div>
+      <div class="card attr" data-cat="relax" data-full="Отправляйся в путешествие! Спокойное течение по периметру всей акватории аквапарка."><img src="img/58374bb8512e4e861420240e8820f92b.jpg" alt="Медленная река"><div class="txt"><h3>Медленная река</h3><p class="desc">Отправляйся в путешествие!</p></div></div>
+      <div class="card attr" data-cat="kids" data-full="Полноценный отдых всей семьёй с незабываемыми развлечениями для детей и их родителей."><img src="img/2333d59b81493081ff7d53e9cd2308fd.jpg" alt="Детский бассейн"><div class="txt"><h3>Детский бассейн</h3><p class="desc">Полноценный отдых всей семьёй с незабываемыми развлечениями для детей и их родителей.</p></div></div>
+      <div class="card attr" data-cat="kids" data-full="Дети очень любят этот семейный воронкообразный спуск на круге для двоих."><img src="img/40a7fc1bc889c8bfc2314abee955a0a2.jpg" alt="Аттракцион Гнездо"><div class="txt"><h3>Гнездо</h3><p class="desc">Дети очень любят.</p></div></div>
+      <div class="card attr" data-cat="kids" data-full="Катайся и купайся! Открытый жёлоб с весёлыми виражами."><img src="img/6bfea33a2a3e9f270a249fc6e423e0ac.jpg" alt="Аттракцион Бултых"><div class="txt"><h3>Бултых</h3><p class="desc">Катайся и купайся.</p></div></div>
+      <div class="card attr" data-cat="kids" data-full="Подружись с дино! Детская горка в стиле Юрского периода."><img src="img/b93acfd1395cbc3b0d32c783659288a0.jpg" alt="Аттракцион Динь-динь"><div class="txt"><h3>Динь-динь</h3><p class="desc">Подружись с дино!</p></div></div>
+      <div class="card attr" data-cat="relax" data-full="Аквамассаж и аквабар. Подогрев воды, гейзеры и гидромассажные пушки."><img src="img/9211926f06051a611d2e4cbaa47af59c.jpg" alt="Relax-бассейн"><div class="txt"><h3>Relax-бассейн</h3><p class="desc">Аквамассаж и аквабар.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="zones" class="section-alt">
+  <div class="container">
+    <h2>Отдых с пользой для здоровья и души</h2>
+    <div class="grid reveal" style="gap:26px">
+      <div class="card zone"><img src="img/zone-sauny.jpg" alt="Сауны, хамам и SPA"><div class="txt"><h3>Сауны, хамам, джакузи и SPA-салон</h3><p>В вашем распоряжении сауны с разными температурными режимами, хамам, ледяная купель, джакузи и SPA-салон. Отдых с пользой для здоровья.</p></div></div>
+      <div class="card zone"><img src="img/zone-kafe.jpg" alt="Кафе и бары аквапарка"><div class="txt"><h3>Аквабар, фитобар, рестораны и детские кафе</h3><p>Предоставляют широкий ассортимент вкусных блюд и напитков прямо на территории аквапарка.</p></div></div>
+      <div class="card zone"><img src="img/zone-fish.jpg" alt="Fish-пилинг"><div class="txt"><h3>Fish-пилинг — рыбки Гарра Руфа</h3><p>Прекрасные косметологи: их прикосновения — это массаж, улучшающий кровообращение и оказывающий успокаивающее действие на центральную нервную систему.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Дополнительные услуги</h2>
+    <div class="services reveal">
+      <div class="svc"><img src="img/photo_img.png" alt="Фотостудия"><h3>Фотостудия</h3></div>
+      <div class="svc"><img src="img/slance_img.png" alt="Магазин MadWave"><h3>Магазин MadWave</h3></div>
+      <div class="svc"><img src="img/fish_img.png" alt="Фишпилинг"><h3>Фишпилинг</h3></div>
+      <div class="svc"><img src="img/suvenir_img.png" alt="Магазин подарков и сувениров"><h3>Магазин подарков и сувениров</h3></div>
+    </div>
+  </div>
+</section>
 
 <section id="about">
   <div class="container">
     <h2>Приветствуем вас на сайте Уфимского Аквапарка «Планета»!</h2>
-    <div class="grid g-about">
+    <div class="grid g-about reveal">
       <div>
         <p>Аквапарк Уфа открыт <strong>14 декабря 2013 года</strong> и является единственным в городе Уфе и Республике Башкортостан крытым парком водных развлечений площадью <strong>5&nbsp;400 кв.м</strong>. Удачное расположение на территории торгового центра «Планета» делает посещение аквапарка максимально комфортным: посетителям доступны многочисленные парковочные места, множество магазинов и ресторанов.</p>
         <br>
         <p>Уникальный дизайн, начиная с холла и заканчивая солнечной террасой, позволяет гостям любого возраста оказаться среди динозавров затерянного мира Юрского периода, тропических озёр и растений. Интерьер прекрасно дополняют водопады, лагуны, медленная река, проходящая по периметру акватории, пещеры и кафе в образе деревушек древних цивилизаций. Огромный комплекс мер направлен в пользу качества предоставляемых услуг и создаёт широкие возможности активного и безопасного отдыха!</p>
         <div class="stats">
-          <div class="stat"><b>5 400</b><span>кв. м площади</span></div>
-          <div class="stat"><b>11</b><span>экстремальных аттракционов</span></div>
-          <div class="stat"><b>2013</b><span>год открытия</span></div>
+          <div class="stat"><b data-count="5400" data-sep="1">0</b><span>кв. м площади</span></div>
+          <div class="stat"><b data-count="11">0</b><span>экстремальных аттракционов</span></div>
+          <div class="stat"><b data-count="2013" data-nosep="1">0</b><span>год открытия</span></div>
         </div>
       </div>
       <ul class="facts">
@@ -164,88 +448,10 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section id="attractions" style="background:#eaf4fb">
-  <div class="container">
-    <h2>Аттракционы и развлечения</h2>
-    <div class="grid g-attr">
-      <div class="card attr"><img src="img/attr-kamikadze.jpg" alt="Аттракцион Камикадзе"><div class="txt"><h3>Камикадзе</h3><p class="desc">Высота старта более 12 метров, а протяжённость более 45 метров! Испытайте себя!</p></div></div>
-      <div class="card attr"><img src="img/attr-volnovoy-basseyn.jpg" alt="Волновой бассейн"><div class="txt"><h3>Волновой бассейн</h3><p class="desc">Огромный бассейн с настоящими волнами дарит ощущения неповторимого отдыха у моря.</p></div></div>
-      <div class="card attr"><img src="img/attr-svobodnoe-padenie.jpg" alt="Аттракцион Свободное падение"><div class="txt"><h3>Свободное падение</h3><p class="desc">Для отважных!</p></div></div>
-      <div class="card attr"><img src="img/attr-krugovorot.jpg" alt="Аттракцион Круговорот"><div class="txt"><h3>Круговорот</h3><p class="desc">Закружит! Завертит!</p></div></div>
-      <div class="card attr"><img src="img/attr-bystraya-reka.jpg" alt="Аттракцион Быстрая река"><div class="txt"><h3>Быстрая река</h3><p class="desc">Вот это виражи!</p></div></div>
-      <div class="card attr"><img src="img/attr-anakonda.jpg" alt="Аттракцион Анаконда"><div class="txt"><h3>Анаконда</h3><p class="desc">Большие радости.</p></div></div>
-      <div class="card attr"><img src="img/attr-gornyy-ruchey.jpg" alt="Аттракцион Горный ручей"><div class="txt"><h3>Горный ручей</h3><p class="desc">День сменяется ночью!</p></div></div>
-      <div class="card attr"><img src="img/attr-medlennaya-reka.jpg" alt="Медленная река"><div class="txt"><h3>Медленная река</h3><p class="desc">Отправляйся в путешествие!</p></div></div>
-      <div class="card attr"><img src="img/attr-detskiy-basseyn.jpg" alt="Детский бассейн"><div class="txt"><h3>Детский бассейн</h3><p class="desc">Полноценный отдых всей семьёй с незабываемыми развлечениями для детей и их родителей.</p></div></div>
-      <div class="card attr"><img src="img/attr-gnezdo.jpg" alt="Аттракцион Гнездо"><div class="txt"><h3>Гнездо</h3><p class="desc">Дети очень любят.</p></div></div>
-      <div class="card attr"><img src="img/attr-bultyh.jpg" alt="Аттракцион Бултых"><div class="txt"><h3>Бултых</h3><p class="desc">Катайся и купайся.</p></div></div>
-      <div class="card attr"><img src="img/attr-din-din.jpg" alt="Аттракцион Динь-динь"><div class="txt"><h3>Динь-динь</h3><p class="desc">Подружись с дино!</p></div></div>
-      <div class="card attr"><img src="img/attr-relax.jpg" alt="Relax-бассейн"><div class="txt"><h3>Relax-бассейн</h3><p class="desc">Аквамассаж и аквабар.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2>Отдых с пользой для здоровья и души</h2>
-    <div class="grid" style="gap:26px">
-      <div class="card zone"><img src="img/zone-sauny.jpg" alt="Сауны, хамам и SPA"><div class="txt"><h3>Сауны, хамам, джакузи и SPA-салон</h3><p>В вашем распоряжении сауны с разными температурными режимами, хамам, ледяная купель, джакузи и SPA-салон. Отдых с пользой для здоровья.</p></div></div>
-      <div class="card zone"><img src="img/zone-kafe.jpg" alt="Кафе и бары аквапарка"><div class="txt"><h3>Аквабар, фитобар, рестораны и детские кафе</h3><p>Предоставляют широкий ассортимент вкусных блюд и напитков прямо на территории аквапарка.</p></div></div>
-      <div class="card zone"><img src="img/zone-fish.jpg" alt="Fish-пилинг"><div class="txt"><h3>Fish-пилинг — рыбки Гарра Руфа</h3><p>Прекрасные косметологи: их прикосновения — это массаж, улучшающий кровообращение и оказывающий успокаивающее действие на центральную нервную систему.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="offers" style="background:#eaf4fb">
-  <div class="container">
-    <h2>Акции, скидки и возможности</h2>
-    <div class="grid g-4">
-      <div class="card offer"><img src="img/sp-lgotnye-tarify.jpg" alt="Льготные тарифы"><div class="txt"><h3>Льготные тарифы</h3><p class="desc">Билеты по меньшей цене для льготной категории граждан, в том числе в каникулы.</p></div></div>
-      <div class="card offer"><img src="img/sp-gruppovye.jpg" alt="Групповые посещения"><div class="txt"><h3>Групповые посещения</h3><p class="desc">Для групп действует система скидок.</p></div></div>
-      <div class="card offer"><img src="img/sp-detskiy-dr.jpg" alt="Детский день рождения"><div class="txt"><h3>Детский День рождения</h3><p class="desc">Организация яркого поздравления с детскими аниматорами!</p></div></div>
-      <div class="card offer"><img src="img/sp-korporativy.jpg" alt="Корпоративы"><div class="txt"><h3>Корпоративы и Дни рождения</h3><p class="desc">Проведите корпоратив или профессиональный праздник по-летнему, в кругу коллег или друзей!</p></div></div>
-    </div>
-
-    <div class="promo">
-      <h3>Скидка 10% на интернет-билет</h3>
-      <p>При покупке билетов на сайте экономьте 10% от стоимости билета на кассах. Скидка уже учтена в тарифе 2 часа, 4 часа и полный день. Акции и скидки друг с другом не суммируются.</p>
-      <a class="btn" href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">Купить билет со скидкой 10%</a>
-    </div>
-
-    <div class="grid g-4" style="margin-top:26px">
-      <div class="card offer"><img src="img/podarochnyy.jpg" alt="Подарочный билет" style="aspect-ratio:16/6;object-fit:cover"><div class="txt"><h3>Лето в подарок</h3><p class="desc">Подарочный билет в Уфимский Аквапарк — кусочек лета в любое время года. Презент, который точно оценят дорогие вам люди.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="news">
-  <div class="container">
-    <h2>Свежие новости и спецпредложения</h2>
-    <div class="news">
-      <div class="news-item"><img src="img/news-1.jpg" alt=""><div><time>15.09.2026</time><strong>Детский билет в Аквапарк за чек из детских магазинов ТРЦ «Планета» — до 25 декабря</strong><p>1 чек от 2 000 рублей = билет для ребёнка в Уфимский Аквапарк!</p></div></div>
-      <div class="news-item"><img src="img/news-2.jpg" alt=""><div><time>06.07.2026</time><strong>Приходите втроём, оплачивайте за двоих!</strong><p>Акция «Три билета по цене двух» снова действует в Уфимском Аквапарке до 30 сентября.</p></div></div>
-      <div class="news-item"><img src="img/news-3.jpg" alt=""><div><time>01.07.2026</time><strong>Детский билет в аквапарк за чек из TeikaBoom</strong><p>Весело совмещаем отдых в TeikaBoom с отдыхом в аквапарке!</p></div></div>
-      <div class="news-item"><img src="img/news-4.jpg" alt=""><div><time>01.06.2026</time><strong>Путешествуйте в Уфимский Аквапарк с детским билетом из гостиничных комплексов</strong><p>Как выгодно путешествовать с ребёнком постояльцам ГК «Башкирия», «Президент Отель», «Хилс Гарден», «Нестеров Плаза» и «Тан».</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section style="background:#eaf4fb">
-  <div class="container">
-    <h2>Дополнительные услуги</h2>
-    <div class="services">
-      <div class="svc"><img src="img/photo_img.png" alt="Фотостудия"><h3>Фотостудия</h3></div>
-      <div class="svc"><img src="img/slance_img.png" alt="Магазин MadWave"><h3>Магазин MadWave</h3></div>
-      <div class="svc"><img src="img/fish_img.png" alt="Фишпилинг"><h3>Фишпилинг</h3></div>
-      <div class="svc"><img src="img/suvenir_img.png" alt="Магазин подарков и сувениров"><h3>Магазин подарков и сувениров</h3></div>
-    </div>
-  </div>
-</section>
-
-<section id="contacts">
+<section id="contacts" class="section-alt">
   <div class="container">
     <h2>Контакты</h2>
-    <div class="contacts">
+    <div class="contacts reveal">
       <div class="contact-card">
         <h3>Телефоны</h3>
         <a href="tel:+73472970297">+7 (347) 297-0-297</a>
@@ -267,7 +473,8 @@ footer a{color:#fff}
         </div>
       </div>
     </div>
-    <div class="notice">⚠️ Это временная версия сайта, восстановленная из архивной копии после потери основного ресурса. Покупка онлайн-билетов и полный перечень информации — на официальном сайте <a href="https://xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">аквауфа.рф</a>.</div>
+    <div style="text-align:center;margin-top:26px"><button class="btn" id="openFeedback">Задать вопрос / оставить отзыв</button></div>
+    <div class="notice">⚠️ Это временная версия сайта, восстановленная из архивной копии после потери основного ресурса аквауфа.рф. Покупка онлайн-билетов — на сервисе <a href="https://order.xn--80aaag3b4ch.xn--p1ai/" target="_blank" rel="noopener">order.аквауфа.рф</a>.</div>
   </div>
 </section>
 
@@ -277,6 +484,248 @@ footer a{color:#fff}
     Временный сайт-визитка, восстановленный из архивной копии сайта аквауфа.рф.
   </div>
 </footer>
+
+<button id="toTop" aria-label="Наверх">↑</button>
+
+<div class="modal-back" id="fbModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <button class="lb-btn lb-close" id="fbClose" aria-label="Закрыть">&#10005;</button>
+    <h3 id="fbTitle">Напишите нам</h3>
+    <p class="muted-note">Основной сайт восстанавливается — вопросы и отзывы можно оставить здесь, они сохранятся в этом браузере.</p>
+    <form id="fbForm" novalidate>
+      <label>Имя<input type="text" name="name" required placeholder="Ваше имя"></label>
+      <label>Телефон или e-mail<input type="text" name="contact" required placeholder="+7 ... или mail@example.ru"></label>
+      <label>Сообщение<textarea name="msg" rows="4" required placeholder="Ваш вопрос или отзыв"></textarea></label>
+      <button class="btn" type="submit">Отправить</button>
+      <div class="form-err" id="fbErr" hidden>Пожалуйста, заполните все поля.</div>
+      <div class="form-ok" id="fbOk" hidden>Спасибо! Ваше обращение сохранено.</div>
+    </form>
+    <div id="fbSaved"></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Предыдущий">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Следующий">›</button>
+  <img id="lbImg" src="" alt="">
+  <div class="cap" id="lbCap"></div>
+</div>
+
+<script>
+// --- Compakt шапка + индикатор прокрутки ---
+const hdr=document.getElementById('siteHeader'),prog=document.getElementById('progress');
+addEventListener('scroll',()=>{
+  hdr.classList.toggle('compact',scrollY>80);
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+// --- Активный пункт меню (scroll spy) ---
+const links=[...document.querySelectorAll('#mainNav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+  }});
+},{rootMargin:'-40% 0px -55% 0px'}).observe && secs.forEach(s=>s&&new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting) links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));});
+},{rootMargin:'-40% 0px -55% 0px'}).observe(s));
+
+// --- Появление секций при прокрутке ---
+const ro=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// --- Анимированные счётчики ---
+function animateCount(el){
+  const target=+el.dataset.count,nosep=el.dataset.nosep,t0=performance.now(),dur=1400;
+  function tick(t){
+    const p=Math.min((t-t0)/dur,1),v=Math.round(target*(1-Math.pow(1-p,3)));
+    el.textContent=nosep?v:v.toLocaleString('ru-RU');
+    if(p<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const co=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){animateCount(e.target);co.unobserve(e.target);}
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+// --- Фильтр аттракционов ---
+const tabs=document.querySelectorAll('.attr-tabs .tab'),attrs=document.querySelectorAll('.attr');
+tabs.forEach(tab=>tab.addEventListener('click',()=>{
+  tabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');
+  const f=tab.dataset.filter;
+  attrs.forEach(c=>{
+    const show=f==='all'||c.dataset.cat===f;
+    c.classList.toggle('hidden-card',!show);
+    if(show){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');}
+  });
+}));
+
+// --- Лайтбокс для карточек аттракционов ---
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+let visibleCards=()=>[...attrs].filter(c=>!c.classList.contains('hidden-card')),curIdx=0;
+function openLb(i){
+  const list=visibleCards();curIdx=(i+list.length)%list.length;
+  const c=list[curIdx],img=c.querySelector('img');
+  lbImg.src=img.src;lbImg.alt=img.alt;
+  lbCap.textContent=c.querySelector('h3').textContent+' — '+c.dataset.full;
+  lb.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+attrs.forEach(c=>c.style.cursor='zoom-in');
+document.querySelector('.g-attr').addEventListener('click',e=>{
+  const card=e.target.closest('.attr');if(!card)return;
+  openLb(visibleCards().indexOf(card));
+});
+document.getElementById('lbClose').onclick=closeLb;
+document.getElementById('lbPrev').onclick=()=>openLb(curIdx-1);
+document.getElementById('lbNext').onclick=()=>openLb(curIdx+1);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape'){closeLb();fbModal.hidden=true;}
+  if(e.key==='ArrowLeft')openLb(curIdx-1);
+  if(e.key==='ArrowRight')openLb(curIdx+1);
+});
+
+// --- Разворот новостей ---
+document.querySelectorAll('.news-item').forEach(n=>n.addEventListener('click',()=>n.classList.toggle('expanded')));
+
+
+// --- Бургер-меню ---
+const burger=document.getElementById('burger'),nav=document.getElementById('mainNav');
+burger.addEventListener('click',()=>{
+  const open=nav.classList.toggle('open');burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.classList.remove('open');}));
+
+// --- Табы акций ---
+document.querySelectorAll('.offer-tabs .tab').forEach(tab=>tab.addEventListener('click',()=>{
+  document.querySelectorAll('.offer-tabs .tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.offer-pane').forEach(p=>p.hidden=p.dataset.opane!==tab.dataset.otab);
+}));
+
+// --- Слайдер новостей ---
+const track=document.getElementById('newsTrack');track.classList.add('snapping');
+const newsStep=()=>Math.min(track.clientWidth*.8,(track.querySelector('.news-item').offsetWidth||300)+18);
+document.getElementById('newsNext').onclick=()=>track.scrollBy({left:newsStep(),behavior:'smooth'});
+document.getElementById('newsPrev').onclick=()=>track.scrollBy({left:-newsStep(),behavior:'smooth'});
+let touchX=null;
+track.addEventListener('touchstart',e=>touchX=e.touches[0].clientX,{passive:true});
+track.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>50)track.scrollBy({left:dx<0?newsStep():-newsStep(),behavior:'smooth'});touchX=null;},{passive:true});
+
+// --- Поиск по контенту ---
+const searchIn=[...document.querySelectorAll('#offers .card,#news .news-item,#prices .tariff,#attractions .attr,#zones .card,#about p,#about li,.svc')];
+const norm=s=>s.toLowerCase().replace(/ё/g,'е');
+let marks=[];
+function clearMarks(){marks.forEach(m=>{const t=m.parentNode;t.replaceChild(document.createTextNode(m.textContent),m);t.normalize();});marks=[];}
+function hlText(node,q){
+  if(node.nodeType===3){const idx=norm(node.textContent).indexOf(q);if(idx<0)return;
+    const m=document.createElement('mark');const after=node.splitText(idx);after.splitText(q.length);m.textContent=after.textContent;after.parentNode.replaceChild(m,after);marks.push(m);}
+  else if(node.childNodes)[...node.childNodes].forEach(c=>hlText(c,q));
+}
+document.getElementById('search').addEventListener('input',e=>{
+  clearMarks();document.querySelectorAll('.hl').forEach(x=>x.classList.remove('hl'));
+  const q=norm(e.target.value.trim());if(q.length<2)return;
+  let first=null;
+  searchIn.forEach(el=>{
+    if(norm(el.textContent).includes(q)){el.classList.add('hl');
+      el.querySelectorAll('h3,strong,p,.desc').forEach(n=>hlText(n,q));
+      if(!first)first=el;}
+  });
+  if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+// --- Счётчик аттракционов ---
+const cnt=document.getElementById('attrCount');
+function updCount(){cnt.textContent='Показано: '+visibleCards().length+' из '+attrs.length;}
+tabs.forEach(t=>t.addEventListener('click',updCount));updCount();
+
+// --- Tilt-эффект карточек ---
+if(matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.tilt').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const rx=((e.clientY-r.top)/r.height-.5)*-6,ry=((e.clientX-r.left)/r.width-.5)*6;
+      card.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+}
+
+// --- Модальное окно обратной связи (localStorage) ---
+const fbModal=document.getElementById('fbModal');
+document.getElementById('openFeedback').onclick=()=>{fbModal.hidden=false;renderSaved();};
+document.getElementById('fbClose').onclick=()=>fbModal.hidden=true;
+fbModal.addEventListener('click',e=>{if(e.target===fbModal)fbModal.hidden=true;});
+function getFb(){try{return JSON.parse(localStorage.getItem('akvaufa_fb')||'[]')}catch(e){return[]}}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderSaved(){
+  const list=getFb(),box=document.getElementById('fbSaved');
+  box.innerHTML=list.length?'<h4 style="color:var(--darker);margin-top:14px">Ваши обращения:</h4>'+list.map(f=>`<div class="saved-item"><b>${esc(f.name)}</b> (${f.date})<br>${esc(f.msg)}</div>`).join(''):'';
+}
+document.getElementById('fbForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target,err=document.getElementById('fbErr'),ok=document.getElementById('fbOk');
+  err.hidden=true;ok.hidden=true;
+  if(!f.name.value.trim()||!f.contact.value.trim()||!f.msg.value.trim()){err.hidden=false;return;}
+  const list=getFb();
+  list.unshift({name:f.name.value.trim(),msg:f.msg.value.trim(),date:new Date().toLocaleDateString('ru-RU')});
+  localStorage.setItem('akvaufa_fb',JSON.stringify(list));
+  ok.hidden=true;ok.hidden=false;f.reset();renderSaved();
+});
+
+// --- Калькулятор билетов ---
+(function(){
+  const prices={120:{a:1755,k:1575,oa:1950,ok:1750},240:{a:2115,k:1890,oa:2350,ok:2100},9999:{a:2385,k:2115,oa:2650,ok:2350}};
+  let adult=2,kid=1,tariff=240;
+  const sumEl=document.getElementById('calcSum'),oldEl=document.getElementById('calcOld');
+  const fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+  function upd(){
+    document.getElementById('cntAdult').textContent=adult;
+    document.getElementById('cntKid').textContent=kid;
+    const p=prices[tariff],sum=adult*p.a+kid*p.k,old=adult*p.oa+kid*p.ok;
+    sumEl.textContent=fmt(sum);
+    oldEl.textContent='было '+fmt(old);
+  }
+  document.querySelectorAll('[data-calc]').forEach(b=>b.addEventListener('click',()=>{
+    const d=+b.dataset.d;
+    if(b.dataset.calc==='adult')adult=Math.min(10,Math.max(0,adult+d));
+    else kid=Math.min(10,Math.max(0,kid+d));
+    upd();
+  }));
+  document.querySelectorAll('.calc-tabs .tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.calc-tabs .tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');tariff=+t.dataset.tariff;upd();
+  }));
+  upd();
+})();
+
+// --- Плавный переход к кнопке покупки из шапки ---
+document.querySelectorAll('.js-scroll').forEach(a=>a.addEventListener('click',e=>{
+  const href=a.getAttribute('href');
+  if(href&&href.startsWith('#')&&href.length>1){ // якорь — обычная плавная прокрутка (css scroll-behavior)
+    const t=document.querySelector(href);
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});
+      t.classList.add('hl');setTimeout(()=>t.classList.remove('hl'),2000);}
+    return;
+  }
+  e.preventDefault();const b=document.getElementById('buy');
+  b.scrollIntoView({behavior:'smooth',block:'center'});
+  b.classList.add('hl');setTimeout(()=>b.classList.remove('hl'),2000);
+}));
+
+// --- Кнопка «Наверх» ---
+const top=document.getElementById('toTop');
+addEventListener('scroll',()=>top.classList.toggle('show',scrollY>500),{passive:true});
+top.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+</script>
 
 </body>
 </html>
